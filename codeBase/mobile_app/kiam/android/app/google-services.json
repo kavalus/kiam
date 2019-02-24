@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "752973742278",
+    "firebase_url": "https://kiam-c4dcd.firebaseio.com",
+    "project_id": "kiam-c4dcd",
+    "storage_bucket": "kiam-c4dcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752973742278:android:9d1c82f60a663e70",
+        "android_client_info": {
+          "package_name": "com.example.kiam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752973742278-6j3p07ea8sv1vn8pi8j836aus60gu7e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kiam",
+            "certificate_hash": "17cfeb7af6b0052626b61c685393319694015d86"
+          }
+        },
+        {
+          "client_id": "752973742278-m5qdds45hau3e0gupjl8g6pmp2la33uv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj0owfkR2nFEhl-t8sEJ5bw3KR0EWa0aA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752973742278-m5qdds45hau3e0gupjl8g6pmp2la33uv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

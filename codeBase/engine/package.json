@@ -1,0 +1,26 @@
+{
+  "name": "engine",
+  "version": "1.0.0",
+  "description": "KIAM Engine to evaluate the incoming request",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "npm start"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "bcryptjs": "*",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "fuse.js": "^3.2.0",
+    "ip-range-check": "0.0.2",
+    "ldapjs": "^1.0.2",
+    "mongoose": "^5.0.11",
+    "node-hashtable": "^0.1.1",
+    "nodemon": "^1.18.4",
+    "range_check": "^1.4.0"
+  },
+  "author": "sumit",
+  "license": "ISC"
+}

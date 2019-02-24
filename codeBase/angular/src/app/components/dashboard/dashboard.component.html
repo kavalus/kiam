@@ -1,0 +1,80 @@
+<div class="content">
+    <div class="container-fluid">
+        <div *ngIf="componentVisibility"  class="row" >
+            <div *ngFor="let menuItem of menuItems" style="cursor:pointer" class="col-md-4">
+                <div class="card card-stats" [routerLink]="[menuItem.path]" >
+                    <div class="card-header" data-background-color="orange">
+                        <i class="material-icons">{{menuItem.icon}}</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category"></p>
+                        <h4 class="title">{{menuItem.title}}</h4>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <p>Get More info...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+           
+            <div *ngIf="!componentVisibility" class="row">
+
+                    <div  class="col-md-4">
+                            <div class="card card-stats" [routerLink]="['/application']" style="cursor: pointer" >
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">folder_open</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category"></p>
+                                    <h4 class="title">Applications</h4>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <p>Get More info...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            <div *ngFor="let mi of disableddashboard" class="col-md-4" data-toggle="modal" data-target="#exampleModal">
+                <div class="card card-stats"  [routerLink]="[mi.path]" style="cursor: not-allowed" >
+                    <div class="card-header" data-background-color="orange">
+                        <i class="material-icons">{{mi.icon}}</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category"></p>
+                        <h4 class="title">{{mi.title}}</h4>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <p>Get More info...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Application Error</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+             Please select application first.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    

@@ -1,0 +1,238 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+  <div class="row">
+    <div class="col-md-8">
+      <h1>
+        Applications
+        <small>View Applicaltion</small>
+      </h1>
+    </div>
+    <div class="col-md-4">
+      <ol id="ol" class="breadcrumb">
+              <li class="active">
+                  <b>
+                      <!-- <ui-switch size="small" color="orange"  (click)="toggle()"  [checked]="false"></ui-switch>  -->
+                 </b>
+                </li>
+        
+              <li class="active">
+          <b>
+            <a  style="color:#00bcd4;" data-toggle="modal" data-target="#addModal" (click)="aData.reset()">
+              <i class="material-icons" >add</i>Add</a>
+          </b>
+        </li>
+        <li class="Reload">
+          <b>
+            <a style="color:#f44336;" (click)="refresh()">
+              <i class="material-icons">autorenew</i>Reload</a>
+          </b>
+        </li>
+        <li class="Reload">
+          <b>
+            <a style="color:#4caf50;" [routerLink]="['/dashboard']">
+              <i class="material-icons">home</i>Home</a>
+          </b>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box">
+
+    <!-- /.box-header -->
+    <div class="box-body">
+      <div class="table-responsive">
+          <nav id="tablesearchbars">
+             <input class="form-control" type="text" name="search" placeholder="Search Filter" [(ngModel)]="filter">      
+            </nav>
+        <table id="dt" class="table table-hover">
+          <thead class="thead-inverse">
+            <tr>
+              <!-- <th> # </th> -->
+              <th (click)="sort('app_name')">Name <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+              <th (click)="sort('app_displayname')">Display name<span class="material-icons" *ngIf="key =='app_displayname'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+              <th (click)="sort('app_description')">Description<span class="material-icons" *ngIf="key =='app_description'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+              <!-- <th (click)="sort('app_type')">Grain Type<span class="material-icons" *ngIf="key =='app_type'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>      -->
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor=" let app of apps | orderBy: key : reverse | filter:filter  | paginate: { itemsPerPage: 5, currentPage: p };let i=index ">
+              <!-- <td>{{app._id}}</td> -->
+              <td>{{app.app_name}}</td>
+              <td>{{app.app_displayname}}</td>
+              <td>{{app.app_description}}</td>
+              <!-- <td>{{app.app_type}}</td> -->
+              
+              <td>
+                <span (click)="editApp(app._id)" data-toggle="modal" data-target="#updateModal">
+                  <i style="color:#4caf50;cursor:pointer" class="material-icons">create</i>
+                </span> &nbsp;&nbsp;&nbsp;
+                <span (click)="setDeleteApplication(app._id,app.app_name)" data-toggle="modal" data-target="#deleteModal">
+                  <i class="material-icons" style="color:#f44336;cursor:pointer">delete</i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px',backdropBackgroundColour: 'rgba(255,255,255,0.3)',primaryColour:'#ff9800',secondaryColour:'#ff9800',tertiaryColour:'#ff9800' }"></ngx-loading>
+        
+        <span style="text-align:right"><pagination-controls (pageChange)="p = $event"></pagination-controls></span>
+
+      </div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+
+
+  
+
+  <!-- /.box -->
+
+
+  <!-- Add modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Application</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" #aData="ngForm" (ngSubmit)="addNewApp(aData.value); aData.reset()">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="app_name">Application Name</label>
+                <input type="text" autocomplete="off" class="form-control" name="app_name" id="app_name" placeholder="Enter name" ngModel>
+              </div>
+              <div class="form-group">  
+                <label for="app_displayname">Application Display name</label>
+                <input type="text" autocomplete="off" class="form-control" name="app_displayname" id="app_displayname" placeholder="Enter display name" ngModel>
+              </div>
+               
+              <!-- <div class="form-group">
+                  <label for="select_drop">Grain Type</label>
+                  <select class="form-control" name="app_type" id="app_type" placeholder="Select Grain Type " ngModel>
+                    <option value="" selected disabled>Select ResourceType</option> 
+                    <option value="Fine">Fine Grain</option>
+                     
+                    <option value="Coarse">Coarse Grain</option>
+                  </select>
+                </div> -->
+
+
+              
+              <div class="form-group">
+                <label for="exampleInputEmail1">Application Description</label>
+                <textarea class="form-control" autocomplete="off" name="app_description" id="app_description" placeholder="Enter description" ngModel></textarea>
+              </div>
+
+            </div>
+            <!-- /.box-body -->
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- End AddModal -->
+
+
+
+  <!-- Update modal -->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Update Application</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" #updateData="ngForm" (ngSubmit)="updateApp(updateData.value,_id);">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="app_name">Application Name</label>
+                <input type="text" autocomplete="off" class="form-control" name="uapp_name" id="uapp_name" placeholder="Enter name" [(ngModel)]="uData">
+              </div>
+              <div class="form-group">
+                <label for="app_displayname">Application Display name</label>
+                <input type="text" autocomplete="off" class="form-control" name="uapp_displayname" id="uapp_displayname" placeholder="Enter display name" [(ngModel)]="app_display">
+              </div>
+                           
+              <!-- <div class="form-group">
+                  <label for="select_drop">Grain Type</label>
+                  <select class="form-control" name="uapp_type" id="uapp_type" placeholder="Select Grain Type " ngModel>
+                    <option value="" selected disabled>Select ResourceType</option> 
+                    <option value="Fine">Fine Grain</option>
+                     
+                    <option value="Coarse">Coarse Grain</option>
+                  </select>
+                </div> -->
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Application Description</label>
+                <textarea autocomplete="off" class="form-control" name="uapp_description" id="uapp_description" placeholder="Enter description" [(ngModel)]="app_desc"></textarea>
+              </div>
+
+            </div>
+            <!-- /.box-body -->
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- End UpdateModal -->
+
+  <!-- Delete modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" style="color: red" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="exampleModalLabel">Delete Application</h4>
+            <hr style="border-top: 1px solid #000; margin-bottom:0;">
+          </div>
+          <div class="modal-body">
+              <div>
+                <h5>Are You Sure You Want To Delete {{applicationNameToBeDeleted}} Application?</h5>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" (click)="deleteApp(applicationIdToBeDeleted)" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </div>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+
+</section>
+

@@ -1,0 +1,63 @@
+body {
+    background-color: #212121;
+    color: #fff;
+}
+
+nav {
+    background-color: #353535 !important;
+    color:#fff !important;
+}
+
+.sidebar {
+    background-color: #353535;
+}
+
+.box{
+    background-color: #353535;
+    color: #fff;
+}
+
+.table-hover>tbody>tr:hover {
+    background-color: #8a8a8a80;
+}
+
+.modal {
+    background: #8a8a8a80;
+}
+
+.modal-content {
+    background-color: #353533;
+}
+
+.form-group > input {
+    color: #fff;
+}
+
+.dropdown-menu{
+    background-color: #353535;
+}
+
+.dropdown-menu li > a{
+    color: #fff;
+}
+
+#selectapp{
+    background-color: black;
+    color: #fff;
+}
+
+.list-group-item{
+    background-color: transparent;
+}
+
+.title{
+    color : #fff;
+}
+
+.card{
+    background-color: #353535;
+}
+
+#ol {
+    background-color: #353535 !important;
+}

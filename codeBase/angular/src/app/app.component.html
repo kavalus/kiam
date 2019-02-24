@@ -1,0 +1,26 @@
+
+  <ng-container *ngIf="authService.loggedIn(); then block; else elsblock"></ng-container>
+  
+  <ng-template #block>
+
+    <div class="wrapper">
+        <app-menu></app-menu>
+        <div class="main-panel">
+            <app-header></app-header>
+            <router-outlet></router-outlet>
+            <!-- <footer class="main-footer" style="position:absolute;bottom:0;background-color:white;position:relative;bottom:0">
+             
+              <strong style="color:#a9afbb"> &nbsp;&nbsp;&nbsp;&copy; 2018 <a>Kavalus Inc</a>.</strong> 
+            </footer> -->
+        </div>
+       
+    </div>
+   
+
+  </ng-template>
+
+  <ng-template #elsblock>
+        <app-login></app-login>
+  </ng-template>
+
+

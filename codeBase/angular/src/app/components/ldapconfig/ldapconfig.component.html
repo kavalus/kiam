@@ -1,0 +1,285 @@
+<div *ngIf="!rsp" class="limiter">
+  <div class="header">
+    <style>.title{font-weight: bold;}
+    </style>
+    <h2 class="title">LDAP Configuration</h2>
+  </div>
+  <form #aData="ngForm" (ngSubmit)="addconfig(aData.value);">
+    <div class="box-body">
+      <div style="display:none;" >
+        <input type="hidden"  class="form-control" name="id" [(ngModel)]="id">
+      </div>
+      <h3 class="title">Server Details</h3>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <h4>URL</h4>
+          <input type="text"  class="form-control" name="url" placeholder="Enter URL" [(ngModel)]="url">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>PORT</h4>
+          <input type="text"  class="form-control" name="port" placeholder="Enter PORT" [(ngModel)]="port">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Admin UID</h4>
+          <input type="text"  class="form-control" name="admin_uid" placeholder="Enter Admin ID" [(ngModel)]="admin_uid">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Admin Password</h4>
+          <input type="password"  class="form-control" name="admin_password" placeholder="Enter Password" [(ngModel)]="admin_password">
+        </div>
+        <div class="col-md-6 form-group">
+          <button type="button" class="btn btn-primary" (click)="checkParams();">Check Connection</button>
+        </div>
+      </div>
+      <h3 class="title">User Details</h3>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <h4>Base DN</h4>
+          <input type="text"  class="form-control" name="user_base_dn" placeholder="Enter Base DN"
+            [(ngModel)]="user_base_dn">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Object Class</h4>
+          <input type="text"  class="form-control" name="user_object_class" placeholder="Enter Object Class"
+            [(ngModel)]="user_object_class">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Filter</h4>
+          <input type="text"  class="form-control" name="user_base_filter" placeholder="Enter Base Filter"
+            [(ngModel)]="user_base_filter">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Search Scope</h4>
+          <select class="form-control" name="user_search_scope" [(ngModel)]="user_search_scope">
+            <option value="" disabled="disabled">--- Select Scope ---</option>
+            <option value="sub">sub</option>
+          </select>
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>UserName Attribute</h4>
+          <input type="text"  class="form-control" name="username" placeholder="Enter Username Attribute"
+            [(ngModel)]="username">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>UserPassword Attribute</h4>
+          <input type="text"  class="form-control" name="user_password"  placeholder="Enter UserPassword Attribute"
+            [(ngModel)]="user_password">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>First Name Attribute</h4>
+          <input type="text"  class="form-control" name="firstname" placeholder="Enter FirstName Attribute"
+            [(ngModel)]="firstname">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Last Name Attribute</h4>
+          <input type="text"  class="form-control" name="lastname"  placeholder="Enter LastName Attribute"
+            [(ngModel)]="lastname">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Mobile No. Attribute</h4>
+          <input type="text" class="form-control" name="mobile_no"  placeholder="Enter Mobile Attribute"
+            [(ngModel)]="mobile_no">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Email Attribute</h4>
+          <input type="text"  class="form-control" name="email"  placeholder="Enter Email Attribute" [(ngModel)]="email">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Designation Attribute</h4>
+          <input type="text"  class="form-control" name="designation"  placeholder="Enter Designation Attribute"
+            [(ngModel)]="designation">
+        </div>
+      </div>
+      <h3 class="title">Role(Groups) Details</h3>
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <h4>Base DN</h4>
+          <input type="text"  class="form-control" name="role_base_dn"  placeholder="Enter Base DN"
+            [(ngModel)]="role_base_dn">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Object Class</h4>
+          <input type="text"  class="form-control" name="role_object_class" placeholder="Enter Object Class"
+            [(ngModel)]="role_object_class">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Filter</h4>
+          <input type="text"  class="form-control" name="role_base_filter"  placeholder="Enter Base Filter"
+            [(ngModel)]="role_base_filter">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Search Scope</h4>
+          <select class="form-control" name="role_search_scope"  [(ngModel)]="role_search_scope">
+            <option value="" disabled="disabled">--- Select Scope ---</option>
+            <option value="sub">sub</option>
+          </select>
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Role Name Attribute</h4>
+          <input type="text"  class="form-control" name="role_name" placeholder="Enter Role Name Attribute"
+            [(ngModel)]="role_name">
+        </div>
+        <div class="col-md-6 form-group">
+          <h4>Role ID Attribute</h4>
+          <input type="text"  class="form-control" name="role_id" placeholder="Enter Role ID Attribute"
+            [(ngModel)]="role_id">
+        </div>
+        <div class="col-md-6 form-group">
+          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-danger" *ngIf="showbutton" (click)="close_add();">Close</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="rsp">
+  <section class="content-header">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h1>
+          LDAP Configuration
+        </h1>
+      </div>
+      <div class="col-md-6">
+        <ol id="ol" class="breadcrumb">
+          <li class="active">
+            <b>
+              <a style="color:#00bcd4;" (click)="change_rsp();">
+                <i class="material-icons">build</i>Config</a>
+            </b>
+          </li>
+          <li class="Reload">
+            <b>
+              <a style="color:#f44336;" (click)="refresh()">
+                <i class="material-icons">autorenew</i>Reload</a>
+            </b>
+          </li>
+          <li class="Reload">
+            <b>
+              <a style="color:#4caf50;" [routerLink]="['/dashboard']">
+                <i class="material-icons">home</i>Home</a>
+            </b>
+          </li>
+          <li class="Reload">
+            <b>
+              <a style="color:#ff9800;" (click)="checkConnection()">
+                <i class="material-icons">compare_arrows</i>Test Connection</a>
+            </b>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="box">
+
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table id="dt" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let config of configs;">
+              <tr>
+                <td>Port</td>
+                <td>{{config.Port}}</td>
+              </tr>
+              <tr>
+                <td>Url</td>
+                <td>{{config.Url}}</td>
+              </tr>
+              <tr>
+                <td>Admin Username Base DN</td>
+                <td>{{config.Admin_UID_BaseDN}}</td>
+              </tr>
+              <tr>
+                <td>Admin Password</td>
+                <td>
+                  <div *ngIf="config.Admin_Password_Attr != ''">*****</div>
+                </td>
+              </tr>
+              <tr>
+                <td>User Base DN</td>
+                <td>{{config.UserBase_DN}}</td>
+              </tr>
+              <tr>
+                <td>Role Base DN</td>
+                <td>{{config.RoleBase_DN}}</td>
+              </tr>
+              <tr>
+                <td>User Object Class</td>
+                <td>{{config.User_ObjectClass}}</td>
+              </tr>
+              <tr>
+                <td>Role Object Class</td>
+                <td>{{config.Role_ObjectClass}}</td>
+              </tr>
+              <tr>
+                <td>User Base Filter</td>
+                <td>{{config.UserBase_Filter}}</td>
+              </tr>
+              <tr>
+                <td>Role Base Filter</td>
+                <td>{{config.RoleBase_Filter}}</td>
+              </tr>
+              <tr>
+                <td>User Search Scope</td>
+                <td>{{config.UserSearch_Scope}}</td>
+              </tr>
+              <tr>
+                <td>Role Search Scope</td>
+                <td>{{config.RoleSearch_Scope}}</td>
+              </tr>
+              <tr>
+                <td>User Name</td>
+                <td>{{config.UserName_Attr}}</td>
+              </tr>
+              <tr>
+                <td>User Password</td>
+                <td>{{config.Password_Attr}}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{config.Email_Attr}}</td>
+              </tr>
+              <tr>
+                <td>Designation</td>
+                <td>{{config.Designation_Attr}}</td>
+              </tr>
+              <tr>
+                <td>Mobile No</td>
+                <td>{{config.Mobile_No_Attr}}</td>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td>{{config.FirstName_Attr}}</td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>{{config.LastName_Attr}}</td>
+              </tr>
+              <tr>
+                <td>Role Name</td>
+                <td>{{config.RoleName_Attr}}</td>
+              </tr>
+              <tr>
+                <td>Role Id</td>
+                <td>{{config.RoleId_Attr}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

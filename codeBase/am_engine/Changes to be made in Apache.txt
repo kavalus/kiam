@@ -1,0 +1,11 @@
+Enable Rewrite in apache (Linux Command: a2enmod rewrite)
+
+In apache2.conf :- 
+
+<Location /> 
+	RewriteEngine On
+	RewriteCond %{REMOTE_HOST} !^[The IP That You Do Not Want To Redirect]
+	RewriteRule .* http://[Where You Want To Redirect] [R,L]
+	Deny from all
+	Allow from [IP Of The Node Server Which Will Make The Call is Allowed Access And will Not Be Redirected]
+</Location>

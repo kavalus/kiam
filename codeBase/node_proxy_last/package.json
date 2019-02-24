@@ -1,0 +1,27 @@
+{
+  "name": "node_proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "cookie-session": "latest",
+    "cookies": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "http-proxy": "latest",
+    "http-proxy-middleware": "latest",
+    "http-proxy-rules": "latest",
+    "jsonwebtoken": "latest",
+    "jwt-simple": "latest",
+    "node-hashtable": "latest",
+    "qr-image": "latest",
+    "qrcode": "latest",
+    "request": "latest"
+  },
+  "author": "",
+  "license": "ISC"
+}

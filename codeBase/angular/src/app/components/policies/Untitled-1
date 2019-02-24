@@ -1,0 +1,25 @@
+changeResources(value) {
+  
+console.log(value,'==========================')
+    if (value === "Public") {
+    
+      this.allresources = [];
+      this.allresources = this.allpublicresources;
+this.policy_scope="Public"
+    }
+    else {
+
+      this._http.get(fetch_resource_url_protected + this.app_id).map(res => res.json()).subscribe(
+        res => {
+        this.allprotectedresources = res
+        },
+        err => { console.log(err) }
+      );
+       this.allresources=[];
+       this.allresources = this.allprotectedresources;
+
+    }
+   
+
+
+  }

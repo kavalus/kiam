@@ -1,0 +1,17 @@
+.arrow_drop_down {
+    position: absolute;
+    display: inline-block
+}
+
+.arrow_drop_down:after {
+    content:"arrow_drop_down"
+}
+
+.arrow_drop_up {
+    position: absolute;
+    display: inline-block
+}
+
+.arrow_drop_up:after {
+    content:"arrow_drop_up"
+}

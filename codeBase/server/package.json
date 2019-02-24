@@ -1,0 +1,27 @@
+{
+  "name": "mean-crud",
+  "version": "1.0.0",
+  "description": "mean crud application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "*",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "ldapjs": "*",
+    "rand-token": "^0.4.0",
+    "nodemailer": "^4.1.0"
+  },
+  "author": "sumit",
+  "license": "ISC"
+}

@@ -1,0 +1,42 @@
+.arrow_drop_down {
+    position: absolute;
+    display: inline-block
+}
+
+.arrow_drop_down:after {
+    content:"arrow_drop_down"
+}
+
+.arrow_drop_up {
+    position: absolute;
+    display: inline-block
+}
+
+.arrow_drop_up:after {
+    content:"arrow_drop_up"
+}
+
+/* .form-check-inline{
+    display:inline;
+
+} */
+.weekDays-selector input {
+    display: none!important;
+  }
+  
+  .weekDays-selector input[type=checkbox] + label {
+    display: inline-block;
+    border-radius: 6px;
+    background: #dddddd;
+    height: 40px;
+    width: 30px;
+    margin-right: 3px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .weekDays-selector input[type=checkbox]:checked + label {
+    background: #2AD705;
+    color: #ffffff;
+  }

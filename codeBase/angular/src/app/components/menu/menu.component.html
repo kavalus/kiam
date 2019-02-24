@@ -1,0 +1,139 @@
+<div class="sidebar" data-active-color="orange">
+  <div class="logo">
+    <a class="simple-text">
+      <img src="assets/img/kavalus.png">
+    </a>
+  </div>
+  <div class="sidebar-wrapper">
+    <ul *ngIf="componentVisibility" class="nav">
+      <li [routerLink]="['/dashboard']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">dashboard</i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <li [routerLink]="['/application']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">folder_open</i>
+          <p>Applications</p>
+        </a>
+      </li>
+      <li [routerLink]="['/attributes']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">view_module</i>
+          <p>Attributes</p>
+        </a>
+      </li>
+      <li [routerLink]="['/resourceTypes']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">collections_bookmark</i>
+          <p>Resource Type</p>
+        </a>
+      </li>
+      <li [routerLink]="['/resources']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">extension</i>
+          <p>Resources</p>
+        </a>
+      </li>
+      <li [routerLink]="['/roles']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">supervisor_account</i>
+          <p>Roles</p>
+        </a>
+      </li>
+      <li [routerLink]="['/policies']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">description</i>
+          <p>Policies</p>
+        </a>
+      </li>
+      <li [routerLink]="['/adminUsers']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">account_box</i>
+          <p>Administrative Users</p>
+        </a>
+      </li>
+      <li [routerLink]="['/ldap-config']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">settings</i>
+          <p>LDAP Configuration</p>
+        </a>
+      </li>
+    </ul>
+    <ul *ngIf="!componentVisibility" class="nav">
+      <li [routerLink]="['/dashboard']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">dashboard</i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <li [routerLink]="['/application']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">folder_open</i>
+          <p>Applications</p>
+        </a>
+      </li>
+      <li data-toggle="modal" data-target="#exampleModal">
+        <a title="Please select application first" style="cursor: not-allowed;">
+          <i class="material-icons">view_module</i>
+          <p>Attributes</p>
+        </a>
+      </li>
+      <li data-toggle="modal" data-target="#exampleModal">
+        <a title="Please select application first" style="cursor: not-allowed;">
+          <i class="material-icons">collections_bookmark</i>
+          <p>Resource Type</p>
+        </a>
+      </li>
+      <li data-toggle="modal" data-target="#exampleModal">
+        <a title="Please select application first" style="cursor: not-allowed;">
+          <i class="material-icons">extension</i>
+          <p>Resources</p>
+        </a>
+      </li>
+      <li data-toggle="modal" data-target="#exampleModal">
+        <a title="Please select application first" style="cursor: not-allowed;">
+          <i class="material-icons">supervisor_account</i>
+          <p>Roles</p>
+        </a>
+      </li>
+      <li data-toggle="modal" data-target="#exampleModal">
+        <a title="Please select application first" style="cursor: not-allowed;">
+          <i class="material-icons">description</i>
+          <p>Policies</p>
+        </a>
+      </li>
+      <li [routerLink]="['/adminUsers']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">account_box</i>
+          <p>Administrative Users</p>
+        </a>
+      </li>
+      <li [routerLink]="['/ldap-config']" [routerLinkActive]="['active']">
+        <a>
+          <i class="material-icons">settings</i>
+          <p>LDAP Configuration</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Application Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please select application first.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

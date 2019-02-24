@@ -1,0 +1,282 @@
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+
+    <div class="row">
+      <div class="col-md-8">
+        <h1>
+          Attributes
+          <small>View Attribute</small>
+        </h1>
+      </div>
+      <div class="col-md-4">
+        <ol id="ol" class="breadcrumb">
+          <li class="active">
+            <b>
+              <a style="color:#00bcd4;" data-toggle="modal" data-target="#addModal" (click)="attributeData.reset()">
+                <i class="material-icons">add</i>Add</a>
+            </b>
+          </li>
+          <li class="Reload">
+            <b>
+              <a style="color:#f44336;" (click)="refresh()">
+                <i class="material-icons">autorenew</i>Reload</a>
+            </b>
+          </li>
+          <li class="Reload">
+            <b>
+              <a style="color:#4caf50;" [routerLink]="['/dashboard']">
+                <i class="material-icons">home</i>Home</a>
+            </b>
+          </li>
+        </ol>
+      </div>
+    </div>
+  
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+ 
+    <div class="box">
+     
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+            <nav id="tablesearchbars" >
+                <input class="form-control" type="text" name="search" placeholder="Search Filter" [(ngModel)]="filter">      
+               </nav>
+            <table id="dt" class="table table-hover" >
+              
+              <thead class="thead-inverse">
+               
+                
+                <tr>
+                  <th (click)="sort('Name')">Name <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+                  <th (click)="sort('Type')">Type <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+                  <th (click)="sort('DataType')">Data Type <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+                  <th (click)="sort('Description')">Description <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+                  <!-- <th (click)="sort('Application')">Application Name <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th> -->
+                  <th (click)="sort('Single_Multiple')">Single | Multiple <span class="material-icons" *ngIf="key =='app_name'" [ngClass]="{'arrow_drop_down':reverse,'arrow_drop_up':!reverse}"></span></th>
+                  <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div *ngIf="filterApplied == false; then thenBlock else elseBlock"></div>
+                <ng-template  #thenBlock>
+                    <tr *ngFor="let attribute of attributes | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p };let i=index ">
+                    <td>{{attribute.Name}}</td>
+                      <td>{{attribute.Type}}</td>
+                      <td>{{attribute.DataType}}</td>
+                      <td>{{attribute.Description}}</td>
+                      <!-- <ng-container *ngFor="let application of applications">
+                          <ng-container *ngIf="attribute.Application_Id == application._id; then thenBlockApp"></ng-container>
+                          <ng-template #thenBlockApp>
+                           <td>{{application.app_name}}</td>
+                          </ng-template>
+                      </ng-container> -->
+                      <td>{{attribute.Single_Multiple}}</td>
+                      <td><span   (click)="editAttribute(attribute._id)" data-toggle="modal" data-target="#updateModal"  > <i style="color:#4caf50;cursor:pointer" class="material-icons">create</i></span> &nbsp;&nbsp;&nbsp;<span (click)="setDeleteAttribute(attribute._id, attribute.Name)" data-toggle="modal" data-target="#deleteModal"> <i class="material-icons" style="color:#f44336;cursor:pointer">delete</i></span></td>
+                    </tr>
+                </ng-template>
+                
+                <ng-template #elseBlock>
+                    <tr *ngFor="let attribute of filteredAttributes">
+                        <!-- <td>{{app._id}}</td> -->
+                        
+                        <td>{{attribute.Name}}</td>
+                        <td>{{attribute.Type}}</td>
+                        <td>{{attribute.DataType}}</td>
+                        <td>{{attribute.Description}}</td>
+                        <!-- <ng-container *ngFor="let application of applications">
+                            <ng-container *ngIf="attribute.Application_Id == application._id; then thenBlockApp"></ng-container>
+                            <ng-template #thenBlockApp>
+                             <td>{{application.app_name}}</td>
+                            </ng-template>
+                        </ng-container> -->
+                        <td>{{attribute.Single_Multiple}}</td>
+                        <td><span   (click)="editAttribute(attribute._id)" data-toggle="modal" data-target="#updateModal"  > <i style="color:#4caf50;cursor:pointer" class="material-icons">create</i></span> &nbsp;&nbsp;&nbsp;<span (click)="setDeleteAttribute(attribute._id, attribute.Name)" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash" style="cursor: pointer; color:red;"></i></span></td>
+                      </tr>
+                </ng-template>
+                </tbody>
+                
+              </table>
+              <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px',backdropBackgroundColour: 'rgba(255,255,255,0.3)',primaryColour:'#ff9800',secondaryColour:'#ff9800',tertiaryColour:'#ff9800' }"></ngx-loading>
+        
+   <span style="text-align:right"><pagination-controls (pageChange)="p = $event"></pagination-controls></span>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+
+    <!-- /.box -->
+  
+
+        <!-- Add modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                <h4 class="modal-title" id="exampleModalLabel">Create Attribute</h4>                
+              </div>
+              <div class="modal-body" style="padding-top:0;">
+                <form role="form" #attributeData = "ngForm"  (ngSubmit)="addNewAttribute(attributeData.value); attributeData.reset()">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="Name">Attribute Name</label>
+                      <input type="text" autocomplete="off" class="form-control" name="Name" id="Name" placeholder="Enter Attribute Name" ngModel>
+                    </div>
+                    <div class="form-group">
+                      <label for="Type">Attribute Type</label>
+                      <select class="form-control" name="Type" id="Type"  ngModel>
+                          <option value="" selected disabled>Select Type</option> 
+ 
+                        <option>Fixed</option>
+                          <option>Dynamic</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="DataType">DataType</label>
+                      <select class="form-control" name="DataType" id="DataType" ngModel>
+                          <option value="" selected disabled>Select Datatype</option> 
+  
+                        <option>String</option>
+                          <option>Boolean</option>
+                          <option>Date</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="Description">Description</label>
+                      <textarea rows="5" autocomplete="off" style="resize: vertical;" class="form-control" name="Description" id="Description" placeholder="Enter Attribute Description" ngModel></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Single_Multiple">Single | Multiple</label>
+                        <select class="form-control" name="Single_Multiple" id="Single_Multiple" ngModel>
+                            <option value="" selected disabled>Select Value Type</option> 
+ 
+                          <option>Single</option>
+                            <option>Multiple</option>
+                        </select>
+                    </div>
+                   
+                  </div>
+                  <!-- /.box-body -->
+      
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                </form>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+
+        <!-- End AddModal -->
+
+
+
+             <!-- Update modal -->
+             <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" style="color: red" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      <h4 class="modal-title" id="updateModalLabel">Update Attribute</h4>
+                      <hr style="border-top: 1px solid #000; margin-bottom:0;">
+                      
+                    </div>
+                    <div class="modal-body" style="padding-top:0;">
+                      <form role="form" #updateData = "ngForm"  (ngSubmit)="updateAttribute(updateData.value,_id);">
+                        <div class="box-body">
+                          <div class="form-group">
+                            <label for="Name">Attribute Name</label>
+                            <input type="text" class="form-control" name="Name" id="Name" placeholder="Enter Attribute Name" [(ngModel)]="uData">
+                          </div>
+                          <div class="form-group">
+                            <label for="Type">Attribute Type</label>
+                            <select class="form-control" name="Type" id="Type"  [(ngModel)]="utype">
+                                <option value="" selected disabled>Select Type</option> 
+                                <option>Fixed</option>
+                                <option>Dynamic</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="DataType">DataType</label>
+                            <select class="form-control" name="DataType" id="DataType" [(ngModel)]="udatatype">
+                                <option value="" selected disabled>Select DataType</option> 
+
+                              <option>String</option>
+                                <option>Boolean</option>
+                                <option>Date</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="Description">Description</label>
+                            <textarea rows="5" style="resize: vertical;" class="form-control" name="Description" id="Description" placeholder="Enter Attribute Description" [(ngModel)]="udesc"></textarea>
+                          </div>
+                          <div class="form-group">
+                              <label for="Single_Multiple">Single | Multiple</label>
+                              <select class="form-control" name="Single_Multiple" id="Single_Multiple" [(ngModel)]="usinmulti">
+                                  <option value="" selected disabled>Select Value Type</option> 
+ 
+                                <option>Single</option>
+                                  <option>Multiple</option>
+                              </select>
+                          </div>
+                         
+                        </div>
+                        <!-- /.box-body -->
+            
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                          
+                        </div>
+                      </form>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+      
+              <!-- End UpdateModal -->
+
+              <!-- Delete modal -->
+              <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" style="color: red" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      <h4 class="modal-title" id="exampleModalLabel">Delete Attribute</h4>
+                      <hr style="border-top: 1px solid #000; margin-bottom:0;">
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                          <h5>Are You Sure You Want To Delete {{attributeNameToBeDeleted}} Attribute?</h5>
+                        </div>
+                        
+                        <div class="modal-footer">
+                          <button type="button" (click)="deleteAttribute(attributeIdToBeDeleted)" class="btn btn-primary">Yes</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+
+              <!-- End AddModal -->
+
+
+        </section>
+       
+        
